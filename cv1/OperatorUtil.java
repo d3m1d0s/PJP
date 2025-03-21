@@ -1,3 +1,4 @@
+package cv1;
 // содержит вспомогательные методы для проверки операторов и их приоритетов
 public class OperatorUtil {
     public static boolean isOperator(char ch) {
