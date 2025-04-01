@@ -39,8 +39,7 @@ public class Test {
             for (Symbol s : r.getRHS()) {
                 Set<String> fs = go.getFirst(s);
                 result.addAll(fs);
-                result.remove("{e}");
-                if (!(s instanceof Nonterminal && go.getEmptyNonterminals().contains(s))) {
+                if (!fs.contains("{e}")) {
                     nullable = false;
                     break;
                 }

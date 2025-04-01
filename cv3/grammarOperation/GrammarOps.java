@@ -60,17 +60,21 @@ public class GrammarOps {
                 Set<String> currentSet = first.get(rule.getLHS());
                 int prevSize = currentSet.size();
 
-                boolean nullable = true;
-                for (Symbol s : rule.getRHS()) {
-                    currentSet.addAll(first.get(s));
-                    currentSet.remove("{e}");
-                    if (!(s instanceof Nonterminal && emptyNonterminals.contains(s))) {
-                        nullable = false;
+                List<Symbol> rhs = rule.getRHS();
+                boolean allNullable = true;
+
+                for (Symbol s : rhs) {
+                    Set<String> fs = first.get(s);
+                    currentSet.addAll(fs);
+                    if (!fs.contains("{e}")) {
+                        allNullable = false;
                         break;
                     }
                 }
 
-                if (nullable) currentSet.add("{e}");
+                // если все символы могут быть пустыми → добавляем ε
+                if (allNullable) currentSet.add("{e}");
+
 
                 if (currentSet.size() != prevSize) {
                     changed = true;
