@@ -1,10 +1,10 @@
-package cv3.grammarOperation;
+package cv3_and_cv4.grammarOperation;
 
 import java.io.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import cv3.grammar.*;
+import cv3_and_cv4.grammar.*;
 
 public class Test {
 
@@ -53,6 +53,13 @@ public class Test {
         for (Nonterminal nt : grammar.getNonterminals()) {
             System.out.println("follow[" + nt.getName() + "] = " + go.getFollow(nt));
         }
+
+        if (go.isLL1()) {
+            System.out.println("\nIt is LL1 grammar");
+        } else {
+            System.out.println("\nIt is not LL1 grammar");
+        }
+        
 
     }
 }

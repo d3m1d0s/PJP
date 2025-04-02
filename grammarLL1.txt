@@ -1,0 +1,5 @@
+{Testing LL1 Grammar}
+
+S : a A | b B;
+A : c;
+B : d;

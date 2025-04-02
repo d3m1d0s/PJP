@@ -1,6 +1,6 @@
-package cv3.grammarOperation;
+package cv3_and_cv4.grammarOperation;
 
-import cv3.grammar.*;
+import cv3_and_cv4.grammar.*;
 import java.util.*;
 
 public class GrammarOps {
@@ -138,5 +138,57 @@ public class GrammarOps {
     public Set<Nonterminal> getEmptyNonterminals() {
         return emptyNonterminals;
     }
+
+    public boolean isLL1() {
+        for (Nonterminal nt : g.getNonterminals()) {
+            List<Rule> rules = nt.getRules();
+    
+            // cохраняем first множества для правых частей
+            List<Set<String>> firstSets = new ArrayList<>();
+    
+            for (Rule rule : rules) {
+                Set<String> result = new HashSet<>();
+                boolean nullable = true;
+    
+                for (Symbol s : rule.getRHS()) {
+                    Set<String> fs = getFirst(s);
+                    result.addAll(fs);
+                    if (!fs.contains("{e}")) {
+                        nullable = false;
+                        break;
+                    }
+                }
+                if (nullable) result.add("{e}");
+                firstSets.add(result);
+            }
+    
+            // сравниваем попарно first множества
+            for (int i = 0; i < firstSets.size(); i++) {
+                for (int j = i + 1; j < firstSets.size(); j++) {
+                    Set<String> intersection = new HashSet<>(firstSets.get(i));
+                    intersection.retainAll(firstSets.get(j));
+                    if (!intersection.isEmpty() && !intersection.equals(Set.of("{e}"))) {
+                        return false;
+                    }
+    
+                    // если {e} в i-м, то FOLLOW(nt) ∩ FIRST(j) должно быть пусто
+                    if (firstSets.get(i).contains("{e}")) {
+                        Set<String> overlap = new HashSet<>(firstSets.get(j));
+                        overlap.retainAll(getFollow(nt));
+                        if (!overlap.isEmpty()) return false;
+                    }
+    
+                    // если {e} в j-м, то FOLLOW(nt) ∩ FIRST(i) должно быть пусто
+                    if (firstSets.get(j).contains("{e}")) {
+                        Set<String> overlap = new HashSet<>(firstSets.get(i));
+                        overlap.retainAll(getFollow(nt));
+                        if (!overlap.isEmpty()) return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
     
 }
