@@ -1,4 +1,4 @@
-package cv2;
+package cv2_and_cv5;
 
 public enum TokenType {
     NUMBER,       

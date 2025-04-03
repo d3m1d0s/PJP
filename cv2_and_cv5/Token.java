@@ -1,8 +1,8 @@
-package cv2;
+package cv2_and_cv5;
 
 public class Token {
-    private final TokenType type;
-    private final String value;
+    final TokenType type;
+    final String value;
 
     public Token(TokenType type, String value) {
         this.type = type;
