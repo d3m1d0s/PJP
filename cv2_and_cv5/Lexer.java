@@ -5,15 +5,15 @@ import java.util.regex.*;
 
 public class Lexer {
     private static final Pattern TOKEN_PATTERN = Pattern.compile(
-        "(?<DIV>\\bdiv\\b)|" +                  
+        "(?<DIV>\\bdiv\\b)|" +
         "(?<MOD>\\bmod\\b)|" +
-        "(?<NUMBER>\\b\\d+\\b)|" +              
-        "(?<OPERATOR>[+\\-*/])|" +            
-        "(?<LPAREN>\\()|" +                    
+        "(?<NUMBER>\\b\\d+\\b)|" +
+        "(?<OPERATOR>[+\\-*/])|" +
+        "(?<LPAREN>\\()|" +
         "(?<RPAREN>\\))|" +
         "(?<SEMICOLON>;)|" +
         "(?<IDENTIFIER>\\b[a-zA-Z][a-zA-Z0-9]*\\b)|" +
-        "(?<COMMENT>//.*)|" +                  
+        "(?<COMMENT>//.*)|" +
         "(?<WHITESPACE>\\s+)"                 
     );
 
