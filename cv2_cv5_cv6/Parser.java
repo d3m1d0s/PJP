@@ -1,4 +1,4 @@
-package cv2_and_cv5;
+package cv2_cv5_cv6;
 
 import java.util.*;
 
@@ -16,69 +16,64 @@ import java.util.*;
      |  num          (10)
  */
 
-public class Parser {
+ public class Parser {
     private final List<Token> tokens;
     private int index = 0;
-    private final List<Integer> rulesUsed = new ArrayList<>();
 
     public Parser(List<Token> tokens) {
         this.tokens = tokens;
     }
 
-    public List<Integer> parse() {
-        E(); // стартовая точка
-        if (index < tokens.size()) throw new RuntimeException("Unexpected token");
-        return rulesUsed;
+    public int parse() {
+        int result = E();
+        if (index < tokens.size()) throw new RuntimeException("Unexpected token after expression");
+        return result;
     }
 
-    private void E() {
-        rulesUsed.add(1);
-        T();
-        E1();
+    private int E() {
+        int t = T();
+        return E1(t);
     }
 
-    private void E1() {
+    private int E1(int acc) {
         if (match("+")) {
-            rulesUsed.add(2);
-            T();
-            E1();
+            int t = T();
+            return E1(acc + t);
         } else if (match("-")) {
-            rulesUsed.add(3);
-            T();
-            E1();
+            int t = T();
+            return E1(acc - t);
         } else {
-            rulesUsed.add(4); // пустое e
+            return acc; // ε
         }
     }
 
-    private void T() {
-        rulesUsed.add(5);
-        F();
-        T1();
+    private int T() {
+        int f = F();
+        return T1(f);
     }
 
-    private void T1() {
+    private int T1(int acc) {
         if (match("*")) {
-            rulesUsed.add(6);
-            F();
-            T1();
+            int f = F();
+            return T1(acc * f);
         } else if (match("/")) {
-            rulesUsed.add(7);
-            F();
-            T1();
+            int f = F();
+            if (f == 0) throw new ArithmeticException("Division by zero");
+            return T1(acc / f);
         } else {
-            rulesUsed.add(8);
+            return acc; // ε
         }
     }
 
-    private void F() {
+    private int F() {
         if (match("(")) {
-            rulesUsed.add(9);
-            E();
+            int e = E();
             if (!match(")")) throw new RuntimeException("Expected )");
+            return e;
         } else if (peek().type == TokenType.NUMBER) {
-            rulesUsed.add(10);
+            int value = Integer.parseInt(peek().value);
             advance();
+            return value;
         } else {
             throw new RuntimeException("Unexpected token in F()");
         }
@@ -93,6 +88,7 @@ public class Parser {
     }
 
     private Token peek() {
+        if (index >= tokens.size()) throw new RuntimeException("Unexpected end of input");
         return tokens.get(index);
     }
 

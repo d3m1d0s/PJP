@@ -1,4 +1,4 @@
-package cv2_and_cv5;
+package cv2_cv5_cv6;
 
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +7,7 @@ public class LexicalAnalyzer {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine());
-        //cv 2
+        // cv 2
         /*
         StringBuilder input = new StringBuilder();
         
@@ -23,7 +23,8 @@ public class LexicalAnalyzer {
             System.out.println(token);
         }
         */ 
-        //cv 5
+        // cv 5
+        /*
         for (int i = 0; i < n; i++) {
             String line = scanner.nextLine();
             Lexer lexer = new Lexer(line);
@@ -36,6 +37,21 @@ public class LexicalAnalyzer {
                     System.out.print(num + " ");
                 }
                 System.out.println();
+            } catch (Exception e) {
+                System.out.println("ERROR");
+            }
+        }
+        */
+        // cv 6
+        for (int i = 0; i < n; i++) {
+            String line = scanner.nextLine();
+            Lexer lexer = new Lexer(line);
+            List<Token> tokens = lexer.tokenize();
+
+            try {
+                Parser parser = new Parser(tokens);
+                int result = parser.parse();
+                System.out.println(result);
             } catch (Exception e) {
                 System.out.println("ERROR");
             }

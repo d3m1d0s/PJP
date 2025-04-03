@@ -1,4 +1,4 @@
-package cv2_and_cv5;
+package cv2_cv5_cv6;
 
 public class Token {
     final TokenType type;
