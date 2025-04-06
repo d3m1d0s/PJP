@@ -1,7 +1,8 @@
 package cv1;
-import java.util.*;
+import java.util.List;
+import java.util.Stack;
 
-// вычисление выражения в постфиксной нотации
+// evaluation of an expression in postfix notation
 public class ExpressionEvaluator {
     public static int evaluatePostfix(List<String> postfix) throws Exception {
         Stack<Integer> stack = new Stack<>();
@@ -20,7 +21,7 @@ public class ExpressionEvaluator {
                     case '-': stack.push(a - b); break;
                     case '*': stack.push(a * b); break;
                     case '/': 
-                        if (b == 0) throw new Exception("ERROR"); // деление на ноль
+                        if (b == 0) throw new Exception("ERROR"); // division by zero
                         stack.push(a / b); 
                         break;
                     default: throw new Exception("ERROR");

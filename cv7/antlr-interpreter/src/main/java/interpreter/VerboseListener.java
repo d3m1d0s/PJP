@@ -18,6 +18,6 @@ public class VerboseListener extends BaseErrorListener {
         Collections.reverse(stack);
         System.err.println("rule stack: " + stack);
         System.err.println("line " + line + ":" + charPositionInLine + " at " + offendingSymbol + ": " + msg);
-        System.exit(1); // остановить выполнение при ошибке
+        System.exit(1); // terminate execution on syntax error
     }
 }

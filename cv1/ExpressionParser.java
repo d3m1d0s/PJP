@@ -1,7 +1,9 @@
 package cv1;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
-// парсинг инфиксного выражения и преобразование его в постфиксное (RPN) - Reverse Polish notation
+// parsing an infix expression and converting it to postfix (RPN) - Reverse Polish Notation
 public class ExpressionParser {
     public static List<String> infixToPostfix(String expression) throws Exception {
         Stack<Character> operators = new Stack<>();
@@ -26,8 +28,8 @@ public class ExpressionParser {
                 while (!operators.isEmpty() && operators.peek() != '(') {
                     output.add(String.valueOf(operators.pop()));
                 }
-                if (operators.isEmpty()) throw new Exception("ERROR"); // некорректные скобки
-                operators.pop(); // убираем '('
+                if (operators.isEmpty()) throw new Exception("ERROR"); // invalid parentheses
+                operators.pop(); // remove '('
             } 
             else if (OperatorUtil.isOperator(ch)) {
                 while (!operators.isEmpty() && OperatorUtil.precedence(operators.peek()) >= OperatorUtil.precedence(ch)) {
@@ -36,13 +38,13 @@ public class ExpressionParser {
                 operators.push(ch);
             } 
             else {
-                throw new Exception("ERROR"); // некорректный символ
+                throw new Exception("ERROR"); // invalid character
             }
             i++;
         }
 
         while (!operators.isEmpty()) {
-            if (operators.peek() == '(') throw new Exception("ERROR"); // некорректные скобки
+            if (operators.peek() == '(') throw new Exception("ERROR"); // invalid parentheses
             output.add(String.valueOf(operators.pop()));
         }
 

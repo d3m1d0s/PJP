@@ -87,17 +87,17 @@ public class GrammarImpl implements Grammar {
     }
 
     /**
-     * Seznam terminalnich symbolu.
+     * List of terminal symbols.
      */
     private final Map<String, Terminal> terminals = new TreeMap<String, Terminal>();
 
     /**
-     * Seznam neterminalnich symbolu.
+     * List of nonterminal symbols.
      */
     private final Map<String, Nonterminal> nonterminals = new TreeMap<String, Nonterminal>();
 
     /**
-     * Startovaci nonterminal.
+     * Start nonterminal.
      */
     private Nonterminal startNonterminal;
 }

@@ -1,7 +1,8 @@
 package cv1;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
-// ввод и обработка выражений
+// input and processing of expressions
 public class ArithmeticInterpreter {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -10,7 +11,7 @@ public class ArithmeticInterpreter {
         StringBuilder output = new StringBuilder();
         
         for (int i = 0; i < N; i++) {
-            String expression = scanner.nextLine().replaceAll("\\s+", ""); // убираем пробелы
+            String expression = scanner.nextLine().replaceAll("\\s+", ""); // remove spaces
             try {
                 List<String> postfix = ExpressionParser.infixToPostfix(expression);
                 int result = ExpressionEvaluator.evaluatePostfix(postfix);

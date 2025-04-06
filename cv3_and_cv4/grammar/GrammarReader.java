@@ -1,6 +1,8 @@
 package cv3_and_cv4.grammar;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.Reader;
 
 public final class GrammarReader {
 
@@ -31,9 +33,9 @@ public final class GrammarReader {
                 sym = getSym();
                 Rule rule = new Rule(lhs);
             
-                // Если сразу ; или |, значит правило пустое → epsilon
+                // if we see ; or | immediately, then the rule is empty -> epsilon
                 if (sym == ';' || sym == '|') {
-                    // пустая правая часть — {e}
+                    // empty right-hand side — {e}
                     Terminal epsilon = grammar.addTerminal("{e}");
                     rule.addSymbol(epsilon);
                     lhs.addRule(rule);

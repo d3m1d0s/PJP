@@ -1,5 +1,5 @@
 package cv1;
-// содержит вспомогательные методы для проверки операторов и их приоритетов
+// contains utility methods for checking operators and their precedence
 public class OperatorUtil {
     public static boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';

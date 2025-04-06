@@ -1,7 +1,18 @@
 package cv3_and_cv4.grammarOperation;
 
-import cv3_and_cv4.grammar.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import cv3_and_cv4.grammar.Grammar;
+import cv3_and_cv4.grammar.Nonterminal;
+import cv3_and_cv4.grammar.Rule;
+import cv3_and_cv4.grammar.Symbol;
+import cv3_and_cv4.grammar.Terminal;
 
 public class GrammarOps {
     Grammar g;
@@ -16,7 +27,7 @@ public class GrammarOps {
         compute_follow();
     }
 
-    // 1: вычисляем нетерминалы, выводящие эпсилон
+    // 1: compute nonterminals that derive epsilon
     private void compute_empty() {
         emptyNonterminals = new TreeSet<>();
         boolean changed;
@@ -41,14 +52,14 @@ public class GrammarOps {
         } while (changed);
     }
 
-    // 2: вычисляем множества FIRST
+    // 2: compute FIRST sets
     private void compute_first() {
-        // инициализация FIRST для терминалов
+        // initialize FIRST sets for terminals
         for (Terminal t : g.getTerminals()) {
             first.put(t, new HashSet<>(Set.of(t.getName())));
         }
 
-        // инициализация FIRST для нетерминалов
+        // initialize FIRST sets for nonterminals
         for (Nonterminal nt : g.getNonterminals()) {
             first.put(nt, new HashSet<>());
         }
@@ -72,7 +83,7 @@ public class GrammarOps {
                     }
                 }
 
-                // если все символы могут быть пустыми → добавляем ε
+                // if all symbols can be nullable -> add {e}
                 if (allNullable) currentSet.add("{e}");
 
 
@@ -83,7 +94,7 @@ public class GrammarOps {
         } while (changed);
     }
 
-    // 3: вычисляем множества FOLLOW
+    // 3: compute FOLLOW sets
     private void compute_follow() {
         for (Nonterminal nt : g.getNonterminals()) {
             follow.put(nt, new HashSet<>());
@@ -126,7 +137,7 @@ public class GrammarOps {
         } while (changed);
     }
 
-    // методы для получения FIRST и FOLLOW
+    // methods to access FIRST and FOLLOW
     public Set<String> getFirst(Symbol s) {
         return first.getOrDefault(s, Set.of());
     }
@@ -143,7 +154,7 @@ public class GrammarOps {
         for (Nonterminal nt : g.getNonterminals()) {
             List<Rule> rules = nt.getRules();
     
-            // cохраняем first множества для правых частей
+            // store FIRST sets for RHSs
             List<Set<String>> firstSets = new ArrayList<>();
     
             for (Rule rule : rules) {
@@ -162,7 +173,7 @@ public class GrammarOps {
                 firstSets.add(result);
             }
     
-            // сравниваем попарно first множества
+            // compare FIRST sets pairwise
             for (int i = 0; i < firstSets.size(); i++) {
                 for (int j = i + 1; j < firstSets.size(); j++) {
                     Set<String> intersection = new HashSet<>(firstSets.get(i));
@@ -171,14 +182,14 @@ public class GrammarOps {
                         return false;
                     }
     
-                    // если {e} в i-м, то FOLLOW(nt) ∩ FIRST(j) должно быть пусто
+                    // if {e} is in i-th, FOLLOW(nt) && FIRST(j) must be empty
                     if (firstSets.get(i).contains("{e}")) {
                         Set<String> overlap = new HashSet<>(firstSets.get(j));
                         overlap.retainAll(getFollow(nt));
                         if (!overlap.isEmpty()) return false;
                     }
     
-                    // если {e} в j-м, то FOLLOW(nt) ∩ FIRST(i) должно быть пусто
+                    // if {e} is in j-th, FOLLOW(nt) && FIRST(i) must be empty
                     if (firstSets.get(j).contains("{e}")) {
                         Set<String> overlap = new HashSet<>(firstSets.get(i));
                         overlap.retainAll(getFollow(nt));

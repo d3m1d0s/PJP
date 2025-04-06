@@ -14,7 +14,7 @@ public class LanguageCustomVisitor extends LanguageBaseVisitor<Integer> {
 
     @Override
     public Integer visitHexa(LanguageParser.HexaContext ctx) {
-        // удаляем "0x"
+        // remove "0x"
         return Integer.parseInt(ctx.HEXA().getText().substring(2), 16);
     }
 

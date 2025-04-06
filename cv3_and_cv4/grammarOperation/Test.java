@@ -1,10 +1,16 @@
 package cv3_and_cv4.grammarOperation;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import cv3_and_cv4.grammar.*;
+import cv3_and_cv4.grammar.Grammar;
+import cv3_and_cv4.grammar.GrammarException;
+import cv3_and_cv4.grammar.GrammarReader;
+import cv3_and_cv4.grammar.Nonterminal;
+import cv3_and_cv4.grammar.Rule;
+import cv3_and_cv4.grammar.Symbol;
 
 public class Test {
 
@@ -26,7 +32,7 @@ public class Test {
 
         GrammarOps go = new GrammarOps(grammar);
 
-        // печать FIRST для каждого правила
+        // print FIRST set for each rule
         System.out.println("\nFIRST sets:");
         for (Rule r : grammar.getRules()) {
             System.out.print("first[" + r.getLHS().getName() + ":");
@@ -48,7 +54,7 @@ public class Test {
             System.out.println(result);
         }
 
-        // печать FOLLOW для каждого нетерминала
+        // print FOLLOW set for each nonterminal
         System.out.println("\nFOLLOW sets:");
         for (Nonterminal nt : grammar.getNonterminals()) {
             System.out.println("follow[" + nt.getName() + "] = " + go.getFollow(nt));
