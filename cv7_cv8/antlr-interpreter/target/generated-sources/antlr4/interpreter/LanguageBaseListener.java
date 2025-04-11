@@ -17,85 +17,97 @@ public class LanguageBaseListener implements LanguageListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStart(LanguageParser.StartContext ctx) { }
+	@Override public void enterProgram(LanguageParser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStart(LanguageParser.StartContext ctx) { }
+	@Override public void exitProgram(LanguageParser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProg(LanguageParser.ProgContext ctx) { }
+	@Override public void enterDeclaration(LanguageParser.DeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProg(LanguageParser.ProgContext ctx) { }
+	@Override public void exitDeclaration(LanguageParser.DeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPar(LanguageParser.ParContext ctx) { }
+	@Override public void enterPrintExpr(LanguageParser.PrintExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPar(LanguageParser.ParContext ctx) { }
+	@Override public void exitPrintExpr(LanguageParser.PrintExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAdd(LanguageParser.AddContext ctx) { }
+	@Override public void enterParens(LanguageParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAdd(LanguageParser.AddContext ctx) { }
+	@Override public void exitParens(LanguageParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOct(LanguageParser.OctContext ctx) { }
+	@Override public void enterAssignment(LanguageParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOct(LanguageParser.OctContext ctx) { }
+	@Override public void exitAssignment(LanguageParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMul(LanguageParser.MulContext ctx) { }
+	@Override public void enterAddSub(LanguageParser.AddSubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMul(LanguageParser.MulContext ctx) { }
+	@Override public void exitAddSub(LanguageParser.AddSubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHexa(LanguageParser.HexaContext ctx) { }
+	@Override public void enterId(LanguageParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHexa(LanguageParser.HexaContext ctx) { }
+	@Override public void exitId(LanguageParser.IdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloat(LanguageParser.FloatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloat(LanguageParser.FloatContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -108,6 +120,30 @@ public class LanguageBaseListener implements LanguageListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInt(LanguageParser.IntContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMulDiv(LanguageParser.MulDivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMulDiv(LanguageParser.MulDivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrimitiveType(LanguageParser.PrimitiveTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrimitiveType(LanguageParser.PrimitiveTypeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

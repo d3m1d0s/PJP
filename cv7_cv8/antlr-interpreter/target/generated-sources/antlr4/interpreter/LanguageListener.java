@@ -8,85 +8,99 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface LanguageListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link LanguageParser#start}.
+	 * Enter a parse tree produced by {@link LanguageParser#program}.
 	 * @param ctx the parse tree
 	 */
-	void enterStart(LanguageParser.StartContext ctx);
+	void enterProgram(LanguageParser.ProgramContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LanguageParser#start}.
+	 * Exit a parse tree produced by {@link LanguageParser#program}.
 	 * @param ctx the parse tree
 	 */
-	void exitStart(LanguageParser.StartContext ctx);
+	void exitProgram(LanguageParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LanguageParser#prog}.
+	 * Enter a parse tree produced by the {@code declaration}
+	 * labeled alternative in {@link LanguageParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterProg(LanguageParser.ProgContext ctx);
+	void enterDeclaration(LanguageParser.DeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link LanguageParser#prog}.
+	 * Exit a parse tree produced by the {@code declaration}
+	 * labeled alternative in {@link LanguageParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitProg(LanguageParser.ProgContext ctx);
+	void exitDeclaration(LanguageParser.DeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code par}
+	 * Enter a parse tree produced by the {@code printExpr}
+	 * labeled alternative in {@link LanguageParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintExpr(LanguageParser.PrintExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code printExpr}
+	 * labeled alternative in {@link LanguageParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintExpr(LanguageParser.PrintExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterPar(LanguageParser.ParContext ctx);
+	void enterParens(LanguageParser.ParensContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code par}
+	 * Exit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitPar(LanguageParser.ParContext ctx);
+	void exitParens(LanguageParser.ParensContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code add}
+	 * Enter a parse tree produced by the {@code assignment}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAdd(LanguageParser.AddContext ctx);
+	void enterAssignment(LanguageParser.AssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code add}
+	 * Exit a parse tree produced by the {@code assignment}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAdd(LanguageParser.AddContext ctx);
+	void exitAssignment(LanguageParser.AssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code oct}
+	 * Enter a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterOct(LanguageParser.OctContext ctx);
+	void enterAddSub(LanguageParser.AddSubContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code oct}
+	 * Exit a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitOct(LanguageParser.OctContext ctx);
+	void exitAddSub(LanguageParser.AddSubContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code mul}
+	 * Enter a parse tree produced by the {@code id}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterMul(LanguageParser.MulContext ctx);
+	void enterId(LanguageParser.IdContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code mul}
+	 * Exit a parse tree produced by the {@code id}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitMul(LanguageParser.MulContext ctx);
+	void exitId(LanguageParser.IdContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code hexa}
+	 * Enter a parse tree produced by the {@code float}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterHexa(LanguageParser.HexaContext ctx);
+	void enterFloat(LanguageParser.FloatContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code hexa}
+	 * Exit a parse tree produced by the {@code float}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitHexa(LanguageParser.HexaContext ctx);
+	void exitFloat(LanguageParser.FloatContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code int}
 	 * labeled alternative in {@link LanguageParser#expr}.
@@ -99,4 +113,26 @@ public interface LanguageListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInt(LanguageParser.IntContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code mulDiv}
+	 * labeled alternative in {@link LanguageParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMulDiv(LanguageParser.MulDivContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code mulDiv}
+	 * labeled alternative in {@link LanguageParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMulDiv(LanguageParser.MulDivContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LanguageParser#primitiveType}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimitiveType(LanguageParser.PrimitiveTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#primitiveType}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimitiveType(LanguageParser.PrimitiveTypeContext ctx);
 }

@@ -11,52 +11,60 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface LanguageVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link LanguageParser#start}.
+	 * Visit a parse tree produced by {@link LanguageParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStart(LanguageParser.StartContext ctx);
+	T visitProgram(LanguageParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LanguageParser#prog}.
+	 * Visit a parse tree produced by the {@code declaration}
+	 * labeled alternative in {@link LanguageParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProg(LanguageParser.ProgContext ctx);
+	T visitDeclaration(LanguageParser.DeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code par}
+	 * Visit a parse tree produced by the {@code printExpr}
+	 * labeled alternative in {@link LanguageParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintExpr(LanguageParser.PrintExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPar(LanguageParser.ParContext ctx);
+	T visitParens(LanguageParser.ParensContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code add}
+	 * Visit a parse tree produced by the {@code assignment}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAdd(LanguageParser.AddContext ctx);
+	T visitAssignment(LanguageParser.AssignmentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code oct}
+	 * Visit a parse tree produced by the {@code addSub}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOct(LanguageParser.OctContext ctx);
+	T visitAddSub(LanguageParser.AddSubContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code mul}
+	 * Visit a parse tree produced by the {@code id}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMul(LanguageParser.MulContext ctx);
+	T visitId(LanguageParser.IdContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code hexa}
+	 * Visit a parse tree produced by the {@code float}
 	 * labeled alternative in {@link LanguageParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHexa(LanguageParser.HexaContext ctx);
+	T visitFloat(LanguageParser.FloatContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code int}
 	 * labeled alternative in {@link LanguageParser#expr}.
@@ -64,4 +72,17 @@ public interface LanguageVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitInt(LanguageParser.IntContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code mulDiv}
+	 * labeled alternative in {@link LanguageParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMulDiv(LanguageParser.MulDivContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#primitiveType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrimitiveType(LanguageParser.PrimitiveTypeContext ctx);
 }

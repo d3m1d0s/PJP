@@ -1,19 +1,38 @@
 grammar Language;
 
-start : prog EOF ;
+/** The start rule; begin parsing here. */
+program: statement+ ;
 
-prog  : (expr ';')+ ;
+statement
+    : primitiveType IDENTIFIER (',' IDENTIFIER)* ';' # declaration
+    | expr ';'                                       # printExpr
+    ;
 
-expr  : expr op=('*'|'/') expr    # mul
-      | expr op=('+'|'-') expr    # add
-      | INT                       # int
-      | OCT                       # oct
-      | HEXA                      # hexa
-      | '(' expr ')'              # par
-      ;
+expr: expr op=(MUL|DIV|MOD) expr                # mulDiv
+    | expr op=(ADD|SUB) expr                # addSub
+    | INT                                   # int
+    | IDENTIFIER                            # id
+    | FLOAT                                 # float
+    | '(' expr ')'                          # parens
+    | <assoc=right> IDENTIFIER '=' expr     # assignment
+    ;
 
-ID    : [a-zA-Z]+ ;
-INT   : [1-9][0-9]* ;
-OCT   : '0'[0-7]* ;
-HEXA  : '0x'[0-9a-fA-F]+ ;
-WS    : [ \t\r\n]+ -> skip ;
+primitiveType
+    : type=INT_KEYWORD
+    | type=FLOAT_KEYWORD
+    ;
+
+
+INT_KEYWORD : 'int';
+FLOAT_KEYWORD : 'float';
+SEMI:               ';';
+COMMA:              ',';
+MUL : '*' ; 
+DIV : '/' ;
+MOD : '%' ;
+ADD : '+' ;
+SUB : '-' ;
+IDENTIFIER : [a-zA-Z]+ ; 
+FLOAT : [0-9]+'.'[0-9]+ ;
+INT : [0-9]+ ; 
+WS : [ \t\r\n]+ -> skip ; // toss out whitespace
