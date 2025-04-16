@@ -2,13 +2,14 @@ package interpreter;
 
 import org.antlr.v4.runtime.Token;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class TypeCheckerVisitor extends LanguageBaseVisitor<Type> {
 
-    private final SymbolTable symbolTable = new SymbolTable();
+    private final SymbolTable symbolTable;
     private final ErrorCollector errors = new ErrorCollector();
+
+    public TypeCheckerVisitor(SymbolTable symbolTable) {
+        this.symbolTable = symbolTable;
+    }
 
     public boolean hasErrors() {
         return errors.hasErrors();

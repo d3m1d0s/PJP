@@ -1,8 +1,11 @@
 package interpreter;
 
 import java.io.IOException;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
+import java.util.List;
+
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 public class Main {
 
@@ -31,13 +34,23 @@ public class Main {
                 return;
             }
 
-            TypeCheckerVisitor typeChecker = new TypeCheckerVisitor();
+            SymbolTable symbolTable = new SymbolTable();
+
+            TypeCheckerVisitor typeChecker = new TypeCheckerVisitor(symbolTable);
             typeChecker.visit(tree);
 
             if (typeChecker.hasErrors()) {
                 typeChecker.printErrors();
                 System.err.println("Aborted due to type errors.");
                 return;
+            }
+
+            CodeGeneratorVisitor generator = new CodeGeneratorVisitor(symbolTable);
+            generator.visit(tree);
+
+            List<Instruction> instructions = generator.getInstructions();
+            for (Instruction inst : instructions) {
+                System.out.println(inst);
             }
 
             // INTERPRETER (won't work without removed class):

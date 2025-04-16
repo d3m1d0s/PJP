@@ -23,4 +23,12 @@ public class SymbolTable {
     public void assign(String name, Type type) {
         variables.put(name, type);
     }
+
+    public void define(String name, Type type) {
+        variables.put(name, type);
+    }
+
+    public Type lookup(String name) {
+        return variables.get(name);
+    }
 }
