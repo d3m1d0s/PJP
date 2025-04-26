@@ -1,6 +1,7 @@
 package interpreter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.antlr.v4.runtime.CharStream;
@@ -49,13 +50,25 @@ public class Main {
             generator.visit(tree);
 
             List<Instruction> instructions = generator.getInstructions();
+            List<String> instructionStrings = new ArrayList<>();
             for (Instruction inst : instructions) {
                 System.out.println(inst);
             }
 
+            for (Instruction inst : instructions) {
+                instructionStrings.add(inst.toString());
+            }
+
+            //FOR TEST:
+            //instructionStrings = Files.readAllLines(Paths.get("input.txt"));
+
+            
             // INTERPRETER (won't work without removed class):
             // LanguageCustomVisitor executor = new LanguageCustomVisitor();
             // executor.visit(tree);
+
+            StackMachine machine = new StackMachine();
+            machine.execute(instructionStrings);
 
             System.out.println("FINISH: " + file);
         }
